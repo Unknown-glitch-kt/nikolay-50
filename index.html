@@ -147,12 +147,9 @@ async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45
  const availability=document.getElementById('rsvp-availability');
  const endpoint=form.dataset.rsvpEndpoint.trim();
  const submissionMode=getRsvpSubmissionMode(window.location);
- // Report the real public page URL after publication or a future domain change.
- if(window.location.protocol==='https:'||window.location.protocol==='http:'){
-  const publicUrl=new URL(window.location.href);publicUrl.hash='';publicUrl.search='';
-  const sourceField=form.querySelector('input[name="_url"]');
-  if(sourceField)sourceField.value=publicUrl.href;
- }
+ // Keep one canonical form identity for all guests and URL variants.
+ const sourceField=form.querySelector('input[name="_url"]');
+ if(sourceField)sourceField.value='https://unknown-glitch-kt.github.io/nikolay-50/';
  // The recipient is configured only after the organizer supplies an address.
  let configured=false;
  try{const url=new URL(endpoint);configured=url.protocol==='https:'&&url.hostname==='formsubmit.co'&&url.pathname.length>1&&!url.username&&!url.password;}catch{}
