@@ -95,8 +95,8 @@ body{padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))}
 <section id="place" class="wrap section place"><div><h2>Встретимся<br><em>здесь.</em></h2><div class="venue"><div class="venue-icon">↗</div><div><h3>Банкетный зал AmBar</h3><p>г. Котлас, улица Кедрова, 10<br>Начало вечера — 13 декабря в 17:00.</p><a class="button venue-map" href="https://yandex.ru/profile/134329512263?lang=ru" target="_blank" rel="noopener noreferrer">Открыть карту <span aria-hidden="true">↗</span></a></div></div><p class="small-note">Ваше присутствие — самое главное. Приходите с хорошим настроением!</p></div></section>
 <section class="rsvp-section" id="rsvp"><div class="wrap rsvp-layout">
 <div class="rsvp-intro"><span class="rsvp-spark" aria-hidden="true">✳</span><h2>Будете<br><em>на празднике?</em></h2><p>Помогите подготовить вечер, в котором каждому будет хорошо.</p></div>
-<form id="rsvp-form" class="rsvp-form" method="post" action="https://formsubmit.co/deklin_kpz@mail.ru" data-rsvp-endpoint="https://formsubmit.co/deklin_kpz@mail.ru" aria-describedby="rsvp-availability">
-<input type="hidden" name="_subject" value="Николай · 50 — ответ гостей"><input type="hidden" name="_template" value="table"><input type="hidden" name="_url" value="https://unknown-glitch-kt.github.io/nikolay-50/">
+<form id="rsvp-form" class="rsvp-form" method="post" action="https://formsubmit.co/51f5c96450a1cad0d03af86d3c07ecec" data-rsvp-endpoint="https://formsubmit.co/51f5c96450a1cad0d03af86d3c07ecec" aria-describedby="rsvp-availability">
+<input type="hidden" name="_subject" value="Николай · 50 — ответ гостей"><input type="hidden" name="_template" value="table"><input type="hidden" name="_url" value="https://xn--50-6kc5agehnl.xn--p1ai/">
 <div class="rsvp-honey" aria-hidden="true"><label>Оставьте это поле пустым<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
 <fieldset><legend>Получится прийти? <span class="required-mark" aria-hidden="true">*</span></legend><div class="attendance-options">
 <label class="attendance-choice"><input type="radio" name="Присутствие" value="Придём" data-attendance="yes" required><span><b>Да, с удовольствием</b><small>Будем праздновать вместе</small></span><i aria-hidden="true">↗</i></label>
@@ -206,10 +206,6 @@ async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45
  const availability=document.getElementById('rsvp-availability');
  const endpoint=form.dataset.rsvpEndpoint.trim();
  const submissionMode=getRsvpSubmissionMode(window.location);
- // Keep one canonical form identity for all guests and URL variants.
- const sourceField=form.querySelector('input[name="_url"]');
- if(sourceField)sourceField.value='https://unknown-glitch-kt.github.io/nikolay-50/';
- // The recipient is configured only after the organizer supplies an address.
  let configured=false;
  try{const url=new URL(endpoint);configured=url.protocol==='https:'&&url.hostname==='formsubmit.co'&&url.pathname.length>1&&!url.username&&!url.password;}catch{}
  if(configured){form.action=endpoint;availability.textContent='';submit.disabled=false;}
