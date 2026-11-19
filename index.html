@@ -115,9 +115,10 @@ body{padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))}
 </div>
 <div class="rsvp-recap" id="rsvp-recap" hidden><span>ВАШ ОТВЕТ</span><p id="rsvp-recap-text" role="status" aria-live="polite"></p></div>
 <p class="rsvp-availability" id="rsvp-availability"></p><p class="rsvp-error" id="rsvp-error" role="alert" tabindex="-1" hidden></p>
-<div class="rsvp-success" id="rsvp-success" role="status" tabindex="-1" hidden><span aria-hidden="true">✓</span><div><h3>Спасибо за ответ!</h3><p>Ваш ответ получен. Спасибо, что помогли подготовить вечер!</p></div></div>
 <button class="button rsvp-submit" id="rsvp-submit" type="submit" disabled>Отправить ответ <span aria-hidden="true">↗</span></button><button type="submit" class="rsvp-external-submit" id="rsvp-external-submit" formtarget="_blank" hidden>Отправить другим способом ↗</button>
-</form></div></section>
+</form>
+<div class="rsvp-success" id="rsvp-success" role="status" tabindex="-1" hidden><span aria-hidden="true">✓</span><div><h3>Ответ уже принят</h3><p>Анкета отправлена из этого браузера. Если планы изменились, сообщите Николаю.</p></div></div>
+</div></section>
 
 <section class="countdown-section"><div class="wrap"><p class="eyebrow">ДО НАШЕЙ ВСТРЕЧИ</p><div class="countdown" id="countdown" role="timer" aria-label="Обратный отсчёт до юбилея"><div><strong id="days">—</strong><span>дней</span></div><i>:</i><div><strong id="hours">—</strong><span>часов</span></div><i>:</i><div><strong id="minutes">—</strong><span>минут</span></div><i>:</i><div><strong id="seconds">—</strong><span>секунд</span></div></div><h2>Буду рад каждому.<br><em>До встречи!</em></h2><p class="footer-sign">Николай</p></div></section>
 </main><footer class="footer wrap"><span>НИКОЛАЙ · 50</span><span>13 ДЕКАБРЯ 2026</span><a href="#home">Наверх ↑</a></footer><dialog class="thanks-dialog" id="rsvp-thanks-dialog" aria-labelledby="rsvp-thanks-title" aria-describedby="rsvp-thanks-text">
@@ -215,6 +216,16 @@ async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45
  }
  let sending=false,sent=false;
  const success=document.getElementById('rsvp-success');
+ const receiptKey='nikolay50-rsvp-20261213-sent';
+ function hasReceipt(){
+  try{return localStorage.getItem(receiptKey)==='1';}
+  catch{return false;}
+ }
+ function showReceipt(){
+  sent=true;
+  form.hidden=true;
+  success.hidden=false;
+ }
  const externalSubmit=document.getElementById('rsvp-external-submit');
  const thankYou=document.getElementById('rsvp-thanks-dialog');
  const closeThankYou=()=>thankYou.close();
@@ -231,7 +242,7 @@ async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45
  });
  thankYou.addEventListener('close',()=>{
   document.documentElement.classList.remove('thanks-is-open');
-  recap.setAttribute('tabindex','-1');recap.focus({preventScroll:true});
+  success.focus({preventScroll:true});
  });
  function attendance(){return form.querySelector('input[data-attendance]:checked')?.dataset.attendance;}
  function refresh(){
@@ -261,9 +272,13 @@ async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45
  form.addEventListener('submit',async event=>{
   error.hidden=true;
   error.textContent='';
+  if(sending||sent||hasReceipt()){
+   event.preventDefault();
+   if(!sending)showReceipt();
+   return;
+  }
   if(!configured){event.preventDefault();error.textContent='Приём ответов ещё не открыт. Пожалуйста, вернитесь чуть позже.';error.hidden=false;return;}
   if(!form.reportValidity()){event.preventDefault();return;}
-  if(sending||sent){event.preventDefault();return;}
   if(event.submitter===externalSubmit||submissionMode!=='ajax'){
    // Local files use the same native POST that the organizer confirmed delivers.
    // The provider's confirmation page owns the result; no AJAX request is made.
@@ -280,13 +295,11 @@ async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45
   try{
    const fields=Object.fromEntries(new FormData(form));
    await sendRsvpResponse(endpoint,fields);
-   sent=true;
-   submit.textContent='Ответ принят ✓';
-   form.querySelectorAll('input,fieldset,button').forEach(el=>el.disabled=true);
-   availability.textContent='';
+   try{localStorage.setItem(receiptKey,'1');}catch{}
+   showReceipt();
    if(typeof thankYou.showModal==='function'){
     thankYou.showModal();document.documentElement.classList.add('thanks-is-open');
-   }else{success.hidden=false;success.focus();}
+   }else{success.focus();}
   }catch(reason){
    const messages={
     'timeout':'Отправка заняла больше времени, чем обычно. Пожалуйста, уточните у организатора, получен ли ваш ответ.',
@@ -305,12 +318,17 @@ async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45
    sending=false;form.removeAttribute('aria-busy');
   }
  });
+ window.addEventListener('storage',event=>{
+  if(event.key===receiptKey&&event.newValue==='1')showReceipt();
+ });
  window.addEventListener('pageshow',()=>{
+  if(hasReceipt())showReceipt();
   if(submissionMode==='native-page')sending=false;
   if(!sent&&!sending){submit.disabled=!configured;submit.innerHTML='Отправить ответ <span aria-hidden="true">↗</span>';}
  });
  if(!motionPreference.matches&&revealObserver){[document.querySelector('.rsvp-intro'),form].forEach((el,index)=>{el.classList.add('reveal');el.style.setProperty('--reveal-delay',`${index*140}ms`);revealObserver.observe(el);});}
- refresh();
+ if(hasReceipt())showReceipt();
+ else refresh();
 })();
 </script>
 <dialog class="album-viewer" id="album-viewer" aria-label="Семейный фотоальбом"><button class="album-close" type="button" aria-label="Закрыть фото">×</button><button class="album-prev" type="button" aria-label="Предыдущее фото">‹</button><img alt=""><button class="album-next" type="button" aria-label="Следующее фото">›</button><span class="album-count" aria-live="polite"></span></dialog>
