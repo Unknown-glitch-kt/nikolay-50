@@ -76,6 +76,11 @@ body{padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))}
  .header{padding-right:24px;flex-wrap:wrap;row-gap:12px}
  .header-date{flex-basis:100%}
 }
+
+.yandex-rsvp{padding:0;min-width:0;background:transparent;border:0;box-shadow:none}
+.yandex-rsvp iframe{display:block;width:100%;border:0;border-radius:12px;background:var(--paper)}
+.yandex-rsvp p{margin:16px 0 0;text-align:center}
+.yandex-rsvp a{color:var(--wine);text-decoration:underline;text-underline-offset:4px}
 </style><style>.rsvp-section{background:#eae4d9;padding:90px 0}.rsvp-layout{display:grid;grid-template-columns:1fr 1.25fr;gap:80px;align-items:start}.rsvp-intro{position:sticky;top:45px}.rsvp-intro>p{font-size:15px;line-height:1.8;max-width:290px}.rsvp-intro>p.muted{font-size:12px;margin-top:24px}.rsvp-spark{display:block;color:var(--wine);font-size:44px;line-height:1;margin-bottom:28px}.rsvp-form{min-width:0}.rsvp-form fieldset{border:0;padding:0;margin:0 0 30px;min-width:0}.rsvp-form legend,.song-label{font-size:16px;line-height:1.5;font-weight:500;margin-bottom:13px;display:block}.required-mark{color:var(--wine)}.attendance-options{display:grid;gap:10px}.attendance-choice{position:relative;display:flex;gap:14px;align-items:center;padding:18px;border:1px solid #cfc6b8;cursor:pointer;transition:border-color .25s,background .25s,transform .25s}.attendance-choice:hover{border-color:var(--wine);transform:translateX(3px)}.attendance-choice:has(input:checked){background:var(--paper);border-color:var(--wine)}.attendance-choice input{width:17px;height:17px;margin:0;accent-color:var(--wine);flex-shrink:0}.attendance-choice b{display:block;font-size:13px;font-weight:500;line-height:1.5}.attendance-choice small{display:block;font-size:10px;color:var(--muted);margin-top:3px;line-height:1.5}.attendance-choice i{font-style:normal;color:var(--wine);margin-left:auto;font-size:20px}.field-hint{font-size:11px;line-height:1.75;color:#706b62;margin:0 0 16px}.guest-counters{display:grid;grid-template-columns:1fr 1fr;gap:15px}.guest-counter>span{font-size:11px;color:var(--muted);display:block;margin-bottom:8px}.guest-counter>div{display:flex;border:1px solid #cfc6b8;background:var(--paper);align-items:center}.guest-counter button{width:45px;height:48px;flex-shrink:0;border:0;background:transparent;color:var(--wine);font-size:21px}.guest-counter button:hover{background:#702d380b}.guest-counter button:disabled{opacity:.3;cursor:default}.guest-counter input{width:100%;min-width:0;border:0;background:transparent;text-align:center;font:20px Manrope,Arial;color:var(--ink);appearance:textfield;-moz-appearance:textfield;padding:8px 0}.guest-counter input::-webkit-inner-spin-button,.guest-counter input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.preference-chips{display:flex;flex-wrap:wrap;gap:9px}.preference-chips label{cursor:pointer;position:relative}.preference-chips input{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}.preference-chips span{display:block;border:1px solid #cfc6b8;padding:11px 16px;font-size:12px;transition:background .25s,color .25s,border-color .25s}.preference-chips input:checked+span{background:var(--wine);border-color:var(--wine);color:var(--paper)}.preference-chips label:hover span{border-color:var(--wine)}.preference-chips input:focus-visible+span{outline:3px solid #ad7c45;outline-offset:3px}.rsvp-form input[type=text]{border:1px solid #cfc6b8;background:var(--paper);padding:16px;width:100%;font:12px 'Golos Text',Arial;color:var(--ink);border-radius:0}.rsvp-form input[type=text]:focus{outline:1px solid var(--wine)}.rsvp-recap{margin-top:26px;border-block:1px solid #cfc6b8;padding:16px 0}.rsvp-recap>span{font-size:8px;letter-spacing:2px;color:var(--muted)}.rsvp-recap p{font-size:14px;line-height:1.8;margin:9px 0 0}.rsvp-availability{font-size:12px;line-height:1.8;color:var(--muted);margin:25px 0 16px}.rsvp-availability:empty{display:none}.rsvp-submit{width:100%;margin-top:6px}.rsvp-submit:disabled{cursor:not-allowed;opacity:.5;transform:none}.rsvp-footnote{margin:13px 0 0;text-align:center;font-size:10px}.rsvp-error{font-size:12px;line-height:1.8;color:var(--wine)}.rsvp-honey{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.rsvp-section [hidden]{display:none!important}.rsvp-section+.countdown-section{background:var(--paper)}
 @media(max-width:1050px){.rsvp-layout{gap:40px}}
 @media(max-width:700px){.rsvp-section{padding:60px 0}.rsvp-layout{grid-template-columns:1fr;gap:30px}.rsvp-intro{position:static}.rsvp-intro h2{font-size:39px}.rsvp-intro>p{max-width:none;font-size:14px}.rsvp-intro>p.muted{margin-top:14px}.rsvp-spark{font-size:34px;margin-bottom:20px}.attendance-choice{padding:16px 13px}.attendance-choice b{font-size:12px}.guest-counters{gap:12px}.guest-counter button{width:38px}.preference-chips span{padding:11px 13px;font-size:11px}.rsvp-form legend,.song-label{font-size:15px}}
@@ -95,46 +100,15 @@ body{padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))}
 <section id="place" class="wrap section place"><div><h2>Встретимся<br><em>здесь.</em></h2><div class="venue"><div class="venue-icon">↗</div><div><h3>Банкетный зал AmBar</h3><p>г. Котлас, улица Кедрова, 10<br>Начало вечера — 13 декабря в 17:00.</p><a class="button venue-map" href="https://yandex.ru/profile/134329512263?lang=ru" target="_blank" rel="noopener noreferrer">Открыть карту <span aria-hidden="true">↗</span></a></div></div><p class="small-note">Ваше присутствие — самое главное. Приходите с хорошим настроением!</p></div></section>
 <section class="rsvp-section" id="rsvp"><div class="wrap rsvp-layout">
 <div class="rsvp-intro"><span class="rsvp-spark" aria-hidden="true">✳</span><h2>Будете<br><em>на празднике?</em></h2><p>Помогите подготовить вечер, в котором каждому будет хорошо.</p></div>
-<form id="rsvp-form" class="rsvp-form" method="post" action="https://formsubmit.co/51f5c96450a1cad0d03af86d3c07ecec" data-rsvp-endpoint="https://formsubmit.co/51f5c96450a1cad0d03af86d3c07ecec" aria-describedby="rsvp-availability">
-<input type="hidden" name="_subject" value="Николай · 50 — ответ гостей"><input type="hidden" name="_template" value="table"><input type="hidden" name="_url" value="https://xn--50-6kc5agehnl.xn--p1ai/">
-<div class="rsvp-honey" aria-hidden="true"><label>Оставьте это поле пустым<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
-<fieldset><legend>Получится прийти? <span class="required-mark" aria-hidden="true">*</span></legend><div class="attendance-options">
-<label class="attendance-choice"><input type="radio" name="Присутствие" value="Придём" data-attendance="yes" required><span><b>Да, с удовольствием</b><small>Будем праздновать вместе</small></span><i aria-hidden="true">↗</i></label>
-<label class="attendance-choice"><input type="radio" name="Присутствие" value="Не сможем" data-attendance="no" required><span><b>К сожалению, не получится</b><small>Мысленно будем рядом</small></span><i aria-hidden="true">—</i></label>
-<label class="attendance-choice"><input type="radio" name="Присутствие" value="Пока не определились" data-attendance="maybe" required><span><b>Пока не знаем</b><small>Уточним чуть позже</small></span><i aria-hidden="true">?</i></label>
-</div></fieldset>
-<fieldset id="rsvp-party" hidden disabled><legend id="party-legend">Сколько вас будет?</legend><p class="field-hint" id="party-hint">Укажите всех, за кого отвечаете, включая себя.</p><div class="guest-counters">
-<label class="guest-counter"><span>Взрослых</span><div><button type="button" data-step="-1" data-input="rsvp-adults" aria-label="Уменьшить число взрослых">−</button><input id="rsvp-adults" name="Взрослых" type="number" min="1" max="30" step="1" value="1" inputmode="numeric" required aria-label="Количество взрослых"><button type="button" data-step="1" data-input="rsvp-adults" aria-label="Увеличить число взрослых">+</button></div></label>
-<label class="guest-counter"><span>Детей</span><div><button type="button" data-step="-1" data-input="rsvp-children" aria-label="Уменьшить число детей">−</button><input id="rsvp-children" name="Детей" type="number" min="0" max="30" step="1" value="0" inputmode="numeric" required aria-label="Количество детей"><button type="button" data-step="1" data-input="rsvp-children" aria-label="Увеличить число детей">+</button></div></label>
-</div></fieldset>
-<div id="rsvp-preferences" hidden><fieldset id="drinks-fieldset" disabled><legend>Что предпочитаете из напитков?</legend><p class="field-hint">Необязательно. Можно отметить несколько вариантов для вашей компании.</p><div class="preference-chips">
-<label><input type="checkbox" name="Напитки" value="Игристое"><span>Игристое</span></label><label><input type="checkbox" name="Напитки" value="Красное вино"><span>Красное вино</span></label><label><input type="checkbox" name="Напитки" value="Белое вино"><span>Белое вино</span></label><label><input type="checkbox" name="Напитки" value="Коньяк / виски"><span>Коньяк / виски</span></label><label><input type="checkbox" name="Напитки" value="Водка"><span>Водка</span></label><label><input type="checkbox" name="Напитки" value="Безалкогольные"><span>Безалкогольные</span></label>
-</div></fieldset>
-<fieldset id="food-fieldset" disabled><legend>А из горячего?</legend><p class="field-hint">Необязательно. Отметьте предпочтения вашей компании.</p><div class="preference-chips"><label><input type="checkbox" name="Горячее" value="Мясо"><span>Мясо</span></label><label><input type="checkbox" name="Горячее" value="Рыба"><span>Рыба</span></label><label><input type="checkbox" name="Горячее" value="Овощное блюдо"><span>Овощное блюдо</span></label></div></fieldset>
-<label class="song-label" for="rsvp-song">Под какую песню потанцуем?</label><input type="text" id="rsvp-song" name="Музыка" maxlength="160" placeholder="Исполнитель и название · по желанию" disabled>
+<div class="rsvp-form yandex-rsvp" id="yandex-rsvp">
+ <iframe src="https://forms.yandex.ru/u/6b045ed1c45c07aa942a1f02?iframe=1" name="ya-form-6b045ed1c45c07aa942a1f02" title="Анкета гостя на юбилей Николая" width="650" height="1040" loading="lazy"></iframe>
+ <p><a href="https://forms.yandex.ru/u/6b045ed1c45c07aa942a1f02/" target="_blank" rel="noopener noreferrer">Открыть анкету в отдельной вкладке ↗</a></p>
 </div>
-<div class="rsvp-recap" id="rsvp-recap" hidden><span>ВАШ ОТВЕТ</span><p id="rsvp-recap-text" role="status" aria-live="polite"></p></div>
-<p class="rsvp-availability" id="rsvp-availability"></p><p class="rsvp-error" id="rsvp-error" role="alert" tabindex="-1" hidden></p>
-<button class="button rsvp-submit" id="rsvp-submit" type="submit" disabled>Отправить ответ <span aria-hidden="true">↗</span></button><button type="submit" class="rsvp-external-submit" id="rsvp-external-submit" formtarget="_self" hidden>Отправить через страницу FormSubmit ↗</button>
-<button type="button" class="rsvp-external-submit" id="rsvp-email" hidden>Отправить анкету по почте ↗</button>
-<div id="rsvp-copy-panel" hidden>
- <button type="button" class="rsvp-external-submit" id="rsvp-copy">Скопировать анкету для Николая</button>
- <p id="rsvp-copy-status" class="rsvp-availability" role="status"></p>
- <textarea id="rsvp-copy-text" rows="5" aria-label="Текст анкеты" readonly hidden></textarea>
-</div>
-</form>
 <div class="rsvp-success" id="rsvp-success" role="status" tabindex="-1" hidden><span aria-hidden="true">✓</span><div><h3>Ответ уже принят</h3><p>Анкета отправлена. Если планы изменились, сообщите Николаю.</p></div></div>
 </div></section>
 
 <section class="countdown-section"><div class="wrap"><p class="eyebrow">ДО НАШЕЙ ВСТРЕЧИ</p><div class="countdown" id="countdown" role="timer" aria-label="Обратный отсчёт до юбилея"><div><strong id="days">—</strong><span>дней</span></div><i>:</i><div><strong id="hours">—</strong><span>часов</span></div><i>:</i><div><strong id="minutes">—</strong><span>минут</span></div><i>:</i><div><strong id="seconds">—</strong><span>секунд</span></div></div><h2>Буду рад каждому.<br><em>До встречи!</em></h2><p class="footer-sign">Николай</p></div></section>
-</main><footer class="footer wrap"><span>НИКОЛАЙ · 50</span><span>13 ДЕКАБРЯ 2026</span><a href="#home">Наверх ↑</a></footer><dialog class="thanks-dialog" id="rsvp-thanks-dialog" aria-labelledby="rsvp-thanks-title" aria-describedby="rsvp-thanks-text">
-<button class="thanks-close" type="button" data-close-thanks aria-label="Закрыть уведомление">×</button>
-<span class="thanks-monogram">НИКОЛАЙ · 50</span>
-<div class="thanks-icon" aria-hidden="true"><svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="35"/><path d="m24 41 11 11 22-25"/></svg></div>
-<h2 id="rsvp-thanks-title">Спасибо<br><em>за ваш ответ!</em></h2>
-<p id="rsvp-thanks-text">Ваша анкета принята. Спасибо, что помогаете подготовить праздник.</p>
-<button class="button thanks-return" type="button" data-close-thanks autofocus>Вернуться к приглашению <span aria-hidden="true">↗</span></button>
-</dialog>
+</main><footer class="footer wrap"><span>НИКОЛАЙ · 50</span><span>13 ДЕКАБРЯ 2026</span><a href="#home">Наверх ↑</a></footer>
 
 <div id="toast" role="status" hidden></div><script>// Пока город не указан, используем местное время гостя.
 const eventDate=new Date(2026,11,13,17,0,0);
@@ -166,216 +140,6 @@ motionPreference.addEventListener('change',event=>{if(event.matches){revealEvery
 // A subtle tick only when a countdown value actually changes.
 const timerObserver=new MutationObserver(mutations=>{if(motionPreference.matches)return;const changed=new Set(mutations.map(m=>m.target.nodeType===Node.TEXT_NODE?m.target.parentElement:m.target));changed.forEach(el=>{if(el.tagName==='STRONG'&&typeof el.animate==='function')el.animate([{opacity:.45,transform:'translateY(3px)'},{opacity:1,transform:'translateY(0)'}],{duration:350,easing:'ease-out'});});});
 timerObserver.observe(document.getElementById('countdown'),{childList:true,subtree:true,characterData:true});
-</script><script>// Official FormSubmit AJAX endpoint: no iframe navigation or opaque requests.
-function getRsvpSubmissionMode(pageLocation){
- if(pageLocation.protocol==='file:')return 'native-page';
- if(pageLocation.origin==='null')return 'native-tab';
- return 'ajax';
-}
-
-async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45000}={}) {
- const target=new URL(endpoint);
- if(target.protocol!=='https:'||target.hostname!=='formsubmit.co'||target.username||target.password||!target.pathname.slice(1))throw new Error('invalid-endpoint');
- target.pathname='/ajax/'+target.pathname.replace(/^\/(?:ajax\/)?/,'');
- const controller=new AbortController();
- const timeout=setTimeout(()=>controller.abort(),timeoutMs);
- try{
-  const response=await fetchImpl(target.href,{
-   method:'POST',mode:'cors',credentials:'omit',
-   headers:{'Accept':'application/json'},
-   body:new URLSearchParams(fields),signal:controller.signal
-  });
-  if(!response.ok)throw new Error('service-error');
-  let result;
-  try{result=await response.json();}catch{throw new Error('invalid-response');}
-  if(!result||(result.success!==true&&result.success!=='true')){
-   const rejection=new Error('not-accepted');
-   rejection.serviceMessage=typeof result?.message==='string'?result.message.slice(0,500):'';
-   throw rejection;
-  }
-  return result;
- }catch(error){
-  if(controller.signal.aborted)throw new Error('timeout');
-  throw error;
- }finally{clearTimeout(timeout);}
-}
-</script><script>(() => {
- const form=document.getElementById('rsvp-form');
- if(!form)return;
- const party=document.getElementById('rsvp-party');
- const preferences=document.getElementById('rsvp-preferences');
- const adults=document.getElementById('rsvp-adults');
- const children=document.getElementById('rsvp-children');
- const recap=document.getElementById('rsvp-recap');
- const recapText=document.getElementById('rsvp-recap-text');
- const submit=document.getElementById('rsvp-submit');
- const error=document.getElementById('rsvp-error');
- const availability=document.getElementById('rsvp-availability');
- const endpoint=form.dataset.rsvpEndpoint.trim();
- const submissionMode=getRsvpSubmissionMode(window.location);
- let configured=false;
- try{const url=new URL(endpoint);configured=url.protocol==='https:'&&url.hostname==='formsubmit.co'&&url.pathname.length>1&&!url.username&&!url.password;}catch{}
- if(configured){form.action=endpoint;availability.textContent='';submit.disabled=false;}
- if(configured&&submissionMode!=='ajax'){
-  form.target=submissionMode==='native-page'?'_self':'_blank';
-  availability.textContent='';
- }
- let sending=false,sent=false;
- const success=document.getElementById('rsvp-success');
- const receiptKey='nikolay50-rsvp-20261213-sent';
- function hasReceipt(){
-  try{return localStorage.getItem(receiptKey)==='1';}
-  catch{return false;}
- }
- function showReceipt(){
-  sent=true;
-  form.hidden=true;
-  success.hidden=false;
- }
- const externalSubmit=document.getElementById('rsvp-external-submit');
- const copyPanel=document.getElementById('rsvp-copy-panel');
- const copyButton=document.getElementById('rsvp-copy');
- const emailButton=document.getElementById('rsvp-email');
- emailButton.hidden=false;
- const copyStatus=document.getElementById('rsvp-copy-status');
- const copyText=document.getElementById('rsvp-copy-text');
- externalSubmit.hidden=!configured||submissionMode!=='ajax';
- const emailSubject='Ответ на приглашение на юбилей Николая';
- function getAnswerText(){
-  const fields=[...new FormData(form)]
-   .filter(([name,value])=>!name.startsWith('_')&&String(value).trim());
-  return fields.map(([name,value])=>name+': '+value).join('\r\n');
- }
- emailButton.addEventListener('click',()=>{
-  if(sending||sent||hasReceipt()||!form.reportValidity())return;
-  copyPanel.hidden=false;
-  availability.textContent='Отправьте черновик в почтовом приложении. Если оно не открылось, скопируйте анкету.';
-  window.location.href='mailto:deklin_kpz@mail.ru?subject='+encodeURIComponent(emailSubject)+'&body='+encodeURIComponent(getAnswerText());
- });
- copyButton.addEventListener('click',async()=>{
-  if(!form.reportValidity())return;
-  const message=emailSubject+'\r\n'+getAnswerText();
-  try{
-   await navigator.clipboard.writeText(message);
-   copyText.hidden=true;
-   copyStatus.textContent='Анкета скопирована. Вставьте её в сообщение Николаю.';
-  }catch{
-   copyText.value=message;
-   copyText.hidden=false;
-   copyText.focus();
-   copyText.select();
-   copyStatus.textContent='Скопируйте выделенный текст и отправьте его Николаю.';
-  }
- });
- const thankYou=document.getElementById('rsvp-thanks-dialog');
- const closeThankYou=()=>thankYou.close();
- thankYou.querySelectorAll('[data-close-thanks]').forEach(button=>button.addEventListener('click',closeThankYou));
- let backdropPress=false;
- thankYou.addEventListener('pointerdown',event=>{
-  const rect=thankYou.getBoundingClientRect();
-  backdropPress=event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom;
- });
- thankYou.addEventListener('click',event=>{
-  const rect=thankYou.getBoundingClientRect();
-  if(backdropPress&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))closeThankYou();
-  backdropPress=false;
- });
- thankYou.addEventListener('close',()=>{
-  document.documentElement.classList.remove('thanks-is-open');
-  success.focus({preventScroll:true});
- });
- function attendance(){return form.querySelector('input[data-attendance]:checked')?.dataset.attendance;}
- function refresh(){
-  const status=attendance();
-  party.hidden=!status;party.disabled=!status;
-  const coming=status==='yes';preferences.hidden=!coming;
-  preferences.querySelectorAll('fieldset,input[type=text]').forEach(el=>el.disabled=!coming);
-  document.getElementById('party-legend').textContent=coming?'Сколько вас будет?':'За сколько человек вы отвечаете?';
-  document.getElementById('party-hint').textContent=coming?'Укажите всех гостей вашей компании, включая себя.':'Укажите размер вашей компании, включая себя.';
-  recap.hidden=!status;
-  const a=Number(adults.value),c=Number(children.value);
-  const valid=Number.isInteger(a)&&a>=1&&a<=30&&Number.isInteger(c)&&c>=0&&c<=30;
-  const prefix=coming?'Придут':status==='no'?'Не смогут прийти':'Пока под вопросом';
-  recapText.textContent=valid?`${prefix}: ${a+c} чел. · Взрослых: ${a}, детей: ${c}.`:'Укажите корректное количество взрослых и детей.';
-  form.querySelectorAll('button[data-step]').forEach(button=>{const input=document.getElementById(button.dataset.input);const number=Number(input.value);button.disabled=Number(button.dataset.step)<0?number<=Number(input.min):number>=Number(input.max);});
- }
- form.addEventListener('change',refresh);form.addEventListener('input',refresh);
- form.addEventListener('formdata',event=>{
-  const data=event.formData;
-  data.set('Всего человек',String(Number(adults.value)+Number(children.value)));
-  for(const field of ['Напитки','Горячее']){
-   const values=data.getAll(field);data.delete(field);
-   if(values.length)data.set(field,values.join(', '));
-  }
- });
- form.querySelectorAll('button[data-step]').forEach(button=>button.addEventListener('click',()=>{const input=document.getElementById(button.dataset.input);if(Number(button.dataset.step)>0)input.stepUp();else input.stepDown();input.dispatchEvent(new Event('input',{bubbles:true}));}));
- form.addEventListener('submit',async event=>{
-  error.hidden=true;
-  error.textContent='';
-  if(sending||sent||hasReceipt()){
-   event.preventDefault();
-   if(!sending)showReceipt();
-   return;
-  }
-  if(!configured){event.preventDefault();error.textContent='Приём ответов ещё не открыт. Пожалуйста, вернитесь чуть позже.';error.hidden=false;return;}
-  if(!form.reportValidity()){event.preventDefault();return;}
-  if(event.submitter===externalSubmit||submissionMode!=='ajax'){
-   // Local files use the same native POST that the organizer confirmed delivers.
-   // The provider's confirmation page owns the result; no AJAX request is made.
-   success.hidden=true;
-   availability.textContent='Дождитесь подтверждения на странице FormSubmit.';
-   sending=true;
-   submit.disabled=true;
-   externalSubmit.disabled=true;
-   submit.textContent='Отправляем…';
-   return;
-  }
-  event.preventDefault();
-  sending=true;submit.disabled=true;externalSubmit.disabled=true;
-  submit.textContent='Отправляем…';form.setAttribute('aria-busy','true');
-  try{
-   const fields=Object.fromEntries(new FormData(form));
-   await sendRsvpResponse(endpoint,fields);
-   try{localStorage.setItem(receiptKey,'1');}catch{}
-   showReceipt();
-   if(typeof thankYou.showModal==='function'){
-    thankYou.showModal();document.documentElement.classList.add('thanks-is-open');
-   }else{success.focus();}
-  }catch(reason){
-   const messages={
-    'timeout':'FormSubmit не подтвердил отправку. Уточните у Николая, дошла ли анкета. Если ответ не получен, отправьте его через страницу FormSubmit или скопируйте анкету для сообщения.',
-    'invalid-response':'Не удалось подтвердить отправку. Ваши ответы остались в анкете. Пожалуйста, попробуйте позже.',
-    'service-error':'Не получилось отправить ответ. Пожалуйста, попробуйте чуть позже.',
-    'not-accepted':'Не получилось отправить ответ. Пожалуйста, попробуйте чуть позже.',
-    'invalid-endpoint':'Сейчас отправка недоступна. Пожалуйста, свяжитесь с организатором.'
-   };
-   error.textContent=messages[reason.message]||'Не удалось подтвердить отправку. Ваши ответы остались в анкете. Пожалуйста, попробуйте позже.';
-   error.hidden=false;
-   copyPanel.hidden=false;
-   error.focus();
-   submit.disabled=false;
-   submit.innerHTML='Повторить отправку <span aria-hidden="true">↗</span>';
-  }finally{
-   sending=false;
-   externalSubmit.disabled=false;
-   form.removeAttribute('aria-busy');
-  }
- });
- window.addEventListener('storage',event=>{
-  if(event.key===receiptKey&&event.newValue==='1')showReceipt();
- });
- window.addEventListener('pageshow',()=>{
-  if(hasReceipt())showReceipt();
-  if(!form.hasAttribute('aria-busy')){
-   sending=false;
-   externalSubmit.disabled=false;
-  }
-  if(!sent&&!sending){submit.disabled=!configured;submit.innerHTML='Отправить ответ <span aria-hidden="true">↗</span>';}
- });
- if(!motionPreference.matches&&revealObserver){[document.querySelector('.rsvp-intro'),form].forEach((el,index)=>{el.classList.add('reveal');el.style.setProperty('--reveal-delay',`${index*140}ms`);revealObserver.observe(el);});}
- if(hasReceipt())showReceipt();
- else refresh();
-})();
 </script>
 <dialog class="album-viewer" id="album-viewer" aria-label="Семейный фотоальбом"><button class="album-close" type="button" aria-label="Закрыть фото">×</button><button class="album-prev" type="button" aria-label="Предыдущее фото">‹</button><img alt=""><button class="album-next" type="button" aria-label="Следующее фото">›</button><span class="album-count" aria-live="polite"></span></dialog>
 <script>
@@ -432,6 +196,15 @@ async function sendRsvpResponse(endpoint, fields, {fetchImpl=fetch, timeoutMs=45
 })();
 </script>
 <a class="button rsvp-shortcut" href="#rsvp">Ответить на приглашение <span aria-hidden="true">↗</span></a>
+<script>
+try{
+ if(localStorage.getItem('nikolay50-rsvp-20261213-sent')==='1'){
+  document.getElementById('yandex-rsvp').hidden=true;
+  document.getElementById('rsvp-success').hidden=false;
+ }
+}catch{}
+</script>
+<script src="https://forms.yandex.ru/_static/embed.js" defer></script>
 </body></html>
 
 
